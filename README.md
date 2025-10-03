@@ -10,7 +10,10 @@ Save/Load with constraints
 
 # Calculation of face and target cube
 
-I have a Blueprint called Main Build. This Blueprint is the parent of all different building types (cube, wheel, and weapon). This Blueprint has colliders on each side.
+To make a build sytem I used the raycast a lot. The system is technicly working like this: Each cube have colliders in each side. I send raycast to the cube and the collider that is getting hit by becomes my area of spawning things. I calculate the center of it and place my object if its free. 
+
+If we go step by step
+First I have a Blueprint called Main Build. This Blueprint is the parent of all different building types (cube, wheel, and weapon). 
 <img width="769" height="526" alt="image" src="https://github.com/user-attachments/assets/49f3cff0-78e8-45d6-bf47-ae2a9268d69b" />
 
 After some checks with booleans, I run this function. I get the forward vector of the collider and make a rotation from that forward vector. With the angle input I can manipulate the offset value. This variable changes from input, which lets the object rotate freely.
