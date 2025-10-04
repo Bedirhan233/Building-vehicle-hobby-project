@@ -72,3 +72,7 @@ With the save button I save the cubes and load them in another scene
 THis of course work with wheels too
 ![4-ezgif com-optimize (1)](https://github.com/user-attachments/assets/890d6749-08f5-4efb-8c7c-3a05fb8c0f21)
 
+This project was originally part of a game idea I worked on with a friend, but we later changed direction, so I decided to end development. Still, I learned a lot about Unreal Engine — especially raycasting, constraints, and data saving systems. There are many areas I’d like to explore further, particularly improving save/load workflows.
+
+Thank you for reading.
+
