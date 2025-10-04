@@ -1,21 +1,27 @@
+# Simple building system
+
 ![3-ezgif com-optimize](https://github.com/user-attachments/assets/f40891bc-f8a9-4395-a1cb-578dd98c22c8)Building Vehicle Hobby Project
 
-Hello! This is a hobby project where my goal was to create a system that lets you build your own car and save it for gameplay.
+### Hello!
+This is a hobby project where my goal was to create a modular vehicle-building system that lets players construct and save their own cars.
 
-Before I go into all the steps, I just want to summarize the main functions here:
+The system allows:
 
-Place and rotate objects
+- Placing and rotating objects using raycasts
 
-Save them so they know their neighbors
+- Tracking occupied sides to prevent overlapping
 
-Set their constraints
+- Connecting parts using physics constraints
 
-Save/Load with constraints
-
-Calculation of Face and Target Cube
+- Saving and loading objects (including constraints)
 
 To make the building system, I used raycasts extensively. The system technically works like this:
-Each cube has colliders on every side. I send a raycast to the cube, and the collider that gets hit becomes the area where a new part can be spawned. I then calculate the center of that collider and place the new object there if the spot is free.
+Each cube has colliders on every side. 
+
+<img width="906" height="530" alt="image" src="https://github.com/user-attachments/assets/212e98b0-5cb0-46d6-bf6d-5eda17392db5" />
+
+
+I send a raycast to the cube, and the collider that gets hit becomes the area where a new part can be spawned. I then calculate the center of that collider and place the new object there if the spot is free.
 
 Step by step:
 First, I have a Blueprint called Main Build, which is the parent class for all different building types (cube, wheel, and weapon).
