@@ -1,35 +1,68 @@
-# Building-vehicle-hobby-project
+![3-ezgif com-optimize](https://github.com/user-attachments/assets/f40891bc-f8a9-4395-a1cb-578dd98c22c8)Building Vehicle Hobby Project
 
-Hello this is a hobby proejct where my goal was to build your own car and save it for gameplay. 
+Hello! This is a hobby project where my goal was to create a system that lets you build your own car and save it for gameplay.
 
-Before I go into all steps I jsut want to summerize the functions here
-I can place and rotate objects 
-Saving them so they know their neghboors 
-Seting their constraints
+Before I go into all the steps, I just want to summarize the main functions here:
+
+Place and rotate objects
+
+Save them so they know their neighbors
+
+Set their constraints
+
 Save/Load with constraints
 
-# Calculation of face and target cube
+Calculation of Face and Target Cube
 
-To make a build sytem I used the raycast a lot. The system is technicly working like this: Each cube have colliders in each side. I send raycast to the cube and the collider that is getting hit by becomes my area of spawning things. I calculate the center of it and place my object if its free. 
+To make the building system, I used raycasts extensively. The system technically works like this:
+Each cube has colliders on every side. I send a raycast to the cube, and the collider that gets hit becomes the area where a new part can be spawned. I then calculate the center of that collider and place the new object there if the spot is free.
 
-If we go step by step
-First I have a Blueprint called Main Build. This Blueprint is the parent of all different building types (cube, wheel, and weapon). 
+Step by step:
+First, I have a Blueprint called Main Build, which is the parent class for all different building types (cube, wheel, and weapon).
+
 <img width="769" height="526" alt="image" src="https://github.com/user-attachments/assets/49f3cff0-78e8-45d6-bf47-ae2a9268d69b" />
 
-After some checks with booleans, I run this function. I get the forward vector of the collider and make a rotation from that forward vector. With the angle input I can manipulate the offset value. This variable changes from input, which lets the object rotate freely.
-<img width="745" height="425" alt="image" src="https://github.com/user-attachments/assets/7722bf45-df39-4964-91ff-34de679637d2" />
+After some boolean checks, I run this function. It gets the forward vector of the collider and creates a rotation based on that vector. With an input angle, I can manipulate the offset value. This variable changes dynamically from player input, allowing the object to rotate freely.
 
-# Occupy sides
-To prevent adding multiple cubes on one side, I made an occupation system. It holds a map of all colliders around the cube, and I keep them all in a map. After I build on one side, I mark it as occupied. In preview, I find the same collider by tag and check if the bool is true or not. If it’s true, then it is occupied, so I change the color of it.
+<img width="745" height="425" alt="image" src="https://github.com/user-attachments/assets/7722bf45-df39-4964-91ff-34de679637d2" />
+Occupy Sides
+
+To prevent adding multiple cubes to the same side, I created an occupation system. It stores all colliders around the cube inside a map. After building on one side, I mark that entry as occupied.
+
+In preview mode, I find the collider by its tag and check if the corresponding boolean in the map is true or false.
+
+If true → the side is occupied, and I change the preview color to red.
+
+If false → the side is free, and placement is allowed.
+
 <img width="776" height="355" alt="image" src="https://github.com/user-attachments/assets/8fa190a3-8ce1-4be9-92b1-0a3b58c7f35b" />
 
-![occupied-ezgif com-optimize](https://github.com/user-attachments/assets/199753b2-c277-4f08-9bba-97f2396a5730)
+Constraints
 
-# Constraints
-I wanted the cubes to be connected together through constraints. For that, I needed a system to let them know the object they will have as their parent. After some debugging I came up with the idea: every spawned object should have an index number. Every time I spawn a cube on another cube, the cube I am hovering my mouse over becomes the one that is attached to the new cube. That makes that cube the parent automatically. So I set the parent index from the parent cube’s actor index number.
+I wanted the cubes to connect using constraints. For that, I needed a system to identify which cube should become the parent of a new piece.
+
+After some debugging, I came up with a simple idea:
+Each spawned object receives a unique index number. When a new cube is placed on another, the cube I’m hovering over becomes the parent automatically. The new cube stores its parent’s index so I can rebuild these relationships later.
 
 <img width="635" height="301" alt="image" src="https://github.com/user-attachments/assets/6a31eb82-2a51-4bf0-81e4-cb7fa638a95f" />
+Save and Load
 
+This was the most challenging part. Initially, I tried saving the entire actor, but when loading, the actors didn’t appear in the scene and Unreal crashed instantly.
 
+After a week of debugging, I changed my approach. Instead of saving the actor itself, I now save its class and transform (location, rotation, scale). When loading, I simply spawn new instances using that data.
 
+<img width="719" height="443" alt="image" src="https://github.com/user-attachments/assets/c231446d-cb24-49a4-a129-49f4335287fd" />
+
+Another problem was that Unreal didn’t allow me to save arrays directly. My solution was to create a temporary array to collect all the data, and then save that array to the file.
+
+Here, I save all arrays into the save file:
+
+<img width="920" height="260" alt="image" src="https://github.com/user-attachments/assets/299b6e3f-f3ce-4eae-8f97-3ed57ba7d3d8" />
+
+This is the result
+With the save button I save the cubes and load them in another scene
+![3-ezgif com-optimize](https://github.com/user-attachments/assets/8aa13513-0626-4e76-9657-3aacec083da9)
+
+THis of course work with wheels too
+![4-ezgif com-optimize (1)](https://github.com/user-attachments/assets/890d6749-08f5-4efb-8c7c-3a05fb8c0f21)
 
