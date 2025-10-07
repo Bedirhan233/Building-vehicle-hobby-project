@@ -3,7 +3,7 @@
 ![3-ezgif com-optimize](https://github.com/user-attachments/assets/f40891bc-f8a9-4395-a1cb-578dd98c22c8)Building Vehicle Hobby Project
 
 ### Hello!
-This is a hobby project where my goal was to create a modular vehicle-building system that lets players construct and save their own cars.
+This is a hobby project where my goal was to create a modular vehicle-building system that lets players construct and save their own cars made by cubes and wheels.
 
 The system allows:
 
